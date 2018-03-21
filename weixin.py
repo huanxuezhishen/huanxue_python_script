@@ -1,3 +1,1 @@
-import itchat
-itchat.auto_login()
-itchat.run() 
+http://www.uc.cn/a/school/2016/1214/4550.html
