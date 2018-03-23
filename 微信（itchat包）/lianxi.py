@@ -1,33 +1,23 @@
 '''
-#一、监控消息
-#coding=utf8
+itchat.search_friends(name=u"Moon")[0]["UserName"]#根据昵称Moon查找她的信息，
+    username即id
+itchat.search_friends(userName=msg['FromUserName'])['NickName']#发给我信息的人的昵称
+'''
+'''
 import itchat
-#1、不带具体对象注册，当a发送消息x给b时,b显示收到消息内容为x，a显示发送成功x。
+
 @itchat.msg_register(itchat.content.TEXT)
-def simple_reply(msg):
-    #itchat.send_msg("收到消息内容为%s"%msg["Text"],toUserName="filehelper")
-    #return "发送成功:%s" %msg["Text"]
-    for i in msg:
-        print(i,    msg[i])
-itchat.auto_login(hotReload=True)
+def simple_rep(msg):
+    #print(msg["CreateTime"])
+    #print(itchat.search_friends(name=u"Moon")[0]["UserName"])
+    #print(itchat.search_friends(userName=msg['FromUserName']))
+    #fromperson=itchat.search_friends(userName=msg['FromUserName'])["UserName"]
+    #itchat.send_msg("收到消息",toUserName=fromperson)#此处toUserName的值必须是id，不能是昵称
 
-#itchat.send("dierci","filehelper")
-   
-itchat.run()
-'''
 '''
 
-#2、带具体对象注册
 
-#coding=utf8
-import itchat
-@itchat.msg_register(itchat.content.TEXT,isFriendChat=True,isGroupChat=True,isMpChat=True)
-def text_reply(msg):
-    #msg.user.send("%s : %s" % (msg.MsgId, msg.text))#user是接收方，fromuser是发送方
-    print(msg)
-itchat.auto_login(hotReload=True)
-itchat.run()
-'''
+
 #该程序的主要功能是监控撤回消息，并且如果有消息撤回就会撤回的消息发送给你，
 #以后再也不用担心看不到好友的撤回的消息了，
 #coding:utf-8
@@ -51,7 +41,9 @@ face_bug=None  #针对表情包的内容
 def handle_receive_msg(msg):
     global face_bug
     msg_time_rec = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())   #接受消息的时间
-    msg_from = itchat.search_friends(userName=msg['FromUserName'])['NickName']   #在好友列表中查询发送信息的好友昵称
+    #print(msg_time_rec,"\r")
+    msg_from = itchat.search_friends(userName=msg['FromUserName'])['NickName']   #在好友列表中查询发送信息的好友昵称\
+    print(msg_from)
     msg_time = msg['CreateTime']    #信息发送的时间
     msg_id = msg['MsgId']    #每条信息的id
     msg_content = None      #储存信息的内容
@@ -68,7 +60,7 @@ def handle_receive_msg(msg):
             or msg['Type'] == 'Recording':
         msg_content = msg['FileName']    #内容就是他们的文件名
         msg['Text'](str(msg_content))    #下载文件
-        # print msg_content
+        
     elif msg['Type'] == 'Card':    #如果消息是推荐的名片
         msg_content = msg['RecommendInfo']['NickName'] + '的名片'    #内容就是推荐人的昵称和性别
         if msg['RecommendInfo']['Sex'] == 1:
@@ -100,13 +92,13 @@ def handle_receive_msg(msg):
             }
         }
     )
-
-
+    
 ##这个是用于监听是否有消息撤回
 @itchat.msg_register(NOTE, isFriendChat=True, isGroupChat=True, isMpChat=True)
 def information(msg):
     #这里如果这里的msg['Content']中包含消息撤回和id，就执行下面的语句
     if '撤回了一条消息' in msg['Content']:
+        
         old_msg_id = re.search("\<msgid\>(.*?)\<\/msgid\>", msg['Content']).group(1)   #在返回的content查找撤回的消息的id
         old_msg = msg_information.get(old_msg_id)    #得到消息
         print (old_msg)
@@ -137,3 +129,8 @@ def information(msg):
 
 itchat.auto_login(hotReload=True)
 itchat.run()
+
+
+
+
+
