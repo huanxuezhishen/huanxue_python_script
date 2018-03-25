@@ -3,7 +3,7 @@ itchat.search_friends(name=u"Moon")[0]["UserName"]#根据昵称Moon查找她的�
     username即id
 itchat.search_friends(userName=msg['FromUserName'])['NickName']#发给我信息的人的昵称
 '''
-'''
+
 import itchat
 
 @itchat.msg_register(itchat.content.TEXT)
@@ -11,13 +11,14 @@ def simple_rep(msg):
     #print(msg["CreateTime"])
     #print(itchat.search_friends(name=u"Moon")[0]["UserName"])
     #print(itchat.search_friends(userName=msg['FromUserName']))
-    #fromperson=itchat.search_friends(userName=msg['FromUserName'])["UserName"]
-    #itchat.send_msg("收到消息",toUserName=fromperson)#此处toUserName的值必须是id，不能是昵称
+    fromperson=itchat.search_friends(userName=msg['FromUserName'])["UserName"]
+    itchat.send_msg("收到消息",toUserName=fromperson)#此处toUserName的值必须是id，不能是昵称
+itchat.auto_login(hotReload=True)
+itchat.run()
+
+
 
 '''
-
-
-
 #该程序的主要功能是监控撤回消息，并且如果有消息撤回就会撤回的消息发送给你，
 #以后再也不用担心看不到好友的撤回的消息了，
 #coding:utf-8
@@ -130,7 +131,7 @@ def information(msg):
 itchat.auto_login(hotReload=True)
 itchat.run()
 
-
+'''
 
 
 
