@@ -7,4 +7,4 @@
 [![baidu](http://www.baidu.com/img/bdlogo.gif "百度logo")](http://baidu.com)
 <br/>
 #read.me中插入github中的图片
-![](https://github.com/huanxuezhishen/ImageCache/raw/master/Logo/foryou.gif)
+![](https://github.com/huanxuezhishen/微信（itchat包）/raw/master/chanpin_img.jpg)
