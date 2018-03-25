@@ -2,7 +2,7 @@
 查看撤销消息的原理：将被被撤销的消息存到字典中
 
 
-#read.me中插入网上的图片
+#read.me中插入网上的图片并超链接
 <br/><br/><br/><br/>
 [![baidu](http://www.baidu.com/img/bdlogo.gif "百度logo")](http://baidu.com)
 <br/>
